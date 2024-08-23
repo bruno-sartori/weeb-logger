@@ -1,5 +1,5 @@
 {
-  "name": "weeb-logger",
+  "name": "@bsartori/weeb-logger",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
