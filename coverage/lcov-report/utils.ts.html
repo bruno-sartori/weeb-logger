@@ -1,0 +1,322 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for utils.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="index.html">All files</a> utils.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">46.03% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>29/63</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">64.28% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>18/28</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">63.63% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>7/11</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">24.44% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>11/45</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const isNull = (value: any): boolean =&gt; value === null;
+&nbsp;
+export const isUndefined = (value: any): boolean =&gt; typeof value === 'undefined';
+&nbsp;
+export const isValidArray = (array: any): boolean =&gt; !isNull(array) &amp;&amp; !isUndefined(array) &amp;&amp; array.constructor === Array &amp;&amp; array.length &gt; 0;
+&nbsp;
+export const isValidString = (string: any): boolean =&gt; !isNull(string) &amp;&amp; !isUndefined(string) &amp;&amp; string.constructor === String &amp;&amp; string !== '' &amp;&amp; string !== 'null' &amp;&amp; string !== 'undefined';
+&nbsp;
+export const isBoolean = (value: any): boolean =&gt; typeof value === 'boolean';
+&nbsp;
+export const isValidObject = (value: any): boolean =&gt; !isNull(value) &amp;&amp; !isUndefined(value) &amp;&amp; value.constructor === Object &amp;&amp; typeof value === 'object';
+&nbsp;
+export const isValidNumber = (value: any): boolean =&gt; !isNull(value) &amp;&amp; !isUndefined(value) &amp;&amp; !isNaN(value) &amp;&amp; typeof value === 'number';
+&nbsp;
+export const getRemSizes = <span class="fstat-no" title="function not covered" >(): number =</span>&gt; {
+  const screenWidth = <span class="cstat-no" title="statement not covered" >window.screen.width;</span>
+  
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (screenWidth &gt;= 1920) {</span>
+<span class="cstat-no" title="statement not covered" >    return 16;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (screenWidth &gt;= 1280) {</span>
+<span class="cstat-no" title="statement not covered" >    return 12;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return 10;</span>
+}
+&nbsp;
+export const pxToRem = <span class="fstat-no" title="function not covered" >(p</span>x: number | string): string =&gt; {
+  const base = <span class="cstat-no" title="statement not covered" >getRemSizes();</span>
+&nbsp;
+  const tempPx = <span class="cstat-no" title="statement not covered" >`${px}`.replace('px', '')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (1 / base) * parseInt(tempPx) + 'rem'</span>
+}
+&nbsp;
+export const formatDate = <span class="fstat-no" title="function not covered" >(d</span>ate: Date): string =&gt; {
+  const day = <span class="cstat-no" title="statement not covered" >String(date.getDate()).padStart(2, '0');</span>
+  const month = <span class="cstat-no" title="statement not covered" >String(date.getMonth() + 1).padStart(2, '0');</span> // Jannuary is 0!
+  const year = <span class="cstat-no" title="statement not covered" >String(date.getFullYear()).slice(-2);</span>
+  const hours = <span class="cstat-no" title="statement not covered" >String(date.getHours()).padStart(2, '0');</span>
+  const minutes = <span class="cstat-no" title="statement not covered" >String(date.getMinutes()).padStart(2, '0');</span>
+  const seconds = <span class="cstat-no" title="statement not covered" >String(date.getSeconds()).padStart(2, '0');</span>
+  const milliseconds = <span class="cstat-no" title="statement not covered" >String(date.getMilliseconds()).padStart(3, '0');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}:${milliseconds}`;</span>
+}
+&nbsp;
+export const getTimeDiff = <span class="fstat-no" title="function not covered" >(d</span>ate1: Date, date2: Date): string =&gt; {
+  // Calcula a diferença em milissegundos
+  let diff = <span class="cstat-no" title="statement not covered" >Math.abs(date2.getTime() - date1.getTime());</span>
+&nbsp;
+  // Extrai horas, minutos, segundos e milissegundos
+  const hours = <span class="cstat-no" title="statement not covered" >Math.floor(diff / (1000 * 60 * 60));</span>
+<span class="cstat-no" title="statement not covered" >  diff -= hours * (1000 * 60 * 60);</span>
+&nbsp;
+  const minutes = <span class="cstat-no" title="statement not covered" >Math.floor(diff / (1000 * 60));</span>
+<span class="cstat-no" title="statement not covered" >  diff -= minutes * (1000 * 60);</span>
+&nbsp;
+  const seconds = <span class="cstat-no" title="statement not covered" >Math.floor(diff / 1000);</span>
+<span class="cstat-no" title="statement not covered" >  diff -= seconds * 1000;</span>
+&nbsp;
+  const milliseconds = <span class="cstat-no" title="statement not covered" >diff;</span>
+&nbsp;
+  // Constrói a string de resultado
+  let result = <span class="cstat-no" title="statement not covered" >'';</span>
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (hours &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      result += `${hours}h`;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (minutes &gt; 0 || hours &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      result += `${minutes}m`;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (seconds &gt; 0 || minutes &gt; 0 || hours &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      result += `${seconds}s`;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  result += `${milliseconds}ms`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return result;</span>
+};
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2024-08-22T16:23:49.162Z
+            </div>
+        <script src="prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
+    </body>
+</html>
+    
