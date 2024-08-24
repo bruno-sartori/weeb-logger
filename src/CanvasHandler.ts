@@ -92,20 +92,15 @@ class WeebLoggerCanvasHandler {
     let height = 40;
     const width = this.canvas.width;
     this.ctx.font = "14px Consolas";
-    console.log(width)
-    console.log(logs.length);
     for (let i = 0; i < logs.length; i++) {
       const log = logs[i];
-      console.log(JSON.stringify(log));
       for (let j = 0; j < log.message.length; j++) {
         const wrappedText = this.wrapText(j === 0 ? `${log.dateStr}${log.label}${log.message[j]}` : log.message[j], 5, width - 30); // -30: scrollbar 10, padding: 20
-        console.log(`1 - `, JSON.stringify(wrappedText));
         for (let k = 0; k < wrappedText.length; k++) {
           height += this.config.containerStyle.lineHeight;
         }
       }
     }
-    console.log('===============', height);
     return height;
   }
 
@@ -114,11 +109,9 @@ class WeebLoggerCanvasHandler {
     this.ctx.fillStyle = "#fff";
     this.ctx.save();
     const width = this.canvas.width;
-    console.log('2 - canvas width: ', width)
     
     for (let i = 0; i < log.message.length; i++) {
       const wrappedText = this.wrapText(i === 0 ? `${log.dateStr}${log.label}${log.message[i]}` : log.message[i], 5, width - 30); // -30: scrollbar 10, padding: 20
-      console.log('2 - ', JSON.stringify(wrappedText));
       for (let j = 0; j < wrappedText.length; j++) {
         const line = wrappedText[j].line;
         let x = wrappedText[j].x;

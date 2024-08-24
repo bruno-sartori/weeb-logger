@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem } from './utils';
-import { BORDER_RADIUS, CONTAINER_POSITION, SCROLLBAR_WIDTH } from './constants';
+import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem, waifuUrls } from './utils';
+import { BORDER_RADIUS, CONTAINER_POSITION, SCROLLBAR_WIDTH, WAIFU_SIZE } from './constants';
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
 import { IWeebRequiredLoggerConfig, LogType } from './types';
@@ -17,7 +17,12 @@ const initialConfig: IWeebRequiredLoggerConfig = {
     opacity: 1,
     lineHeight: 20,
   },
-  waifu: 'alya'
+  waifu: {
+    showWaifu: true,
+    name: 'masha',
+    size: 'small',
+    useTheme: true
+  }
 }
 
 class WeebLogger {
@@ -26,17 +31,16 @@ class WeebLogger {
 
   private resizable?: HTMLDivElement;
   private container?: HTMLDivElement;
-  private resizers?: HTMLDivElement;
   private canvas?: HTMLCanvasElement;
 
   private canvasHandler?: WeebLoggerCanvasHandler;
 
   private isLeftSide() {
-    return this.config.containerStyle!.position === 'bottom-left' || 
-    this.config.containerStyle!.position === 'top-left';
+    return this.config.containerStyle!.position === 'bottom-left' ||
+      this.config.containerStyle!.position === 'top-left';
   }
 
-  public configure(newConfig: IWeebLoggerConfig = {...initialConfig}) {
+  public configure(newConfig: IWeebLoggerConfig = { ...initialConfig }) {
     const config: IWeebRequiredLoggerConfig = {
       enabled: newConfig.enabled ?? initialConfig.enabled,
       visual: newConfig.visual ?? initialConfig.visual,
@@ -47,7 +51,12 @@ class WeebLogger {
         opacity: newConfig.containerStyle?.opacity ?? initialConfig.containerStyle.opacity,
         lineHeight: newConfig.containerStyle?.lineHeight ?? initialConfig.containerStyle?.lineHeight,
       } || {},
-      waifu: newConfig.waifu ?? initialConfig.waifu
+      waifu: {
+        showWaifu: newConfig.waifu?.showWaifu ?? initialConfig.waifu.showWaifu,
+        name: newConfig.waifu?.name ?? initialConfig.waifu.name,
+        size: newConfig.waifu?.size ?? initialConfig.waifu.size,
+        useTheme: newConfig.waifu?.useTheme ?? initialConfig.waifu.useTheme
+      }
     };
 
     this.config = config;
@@ -107,9 +116,9 @@ class WeebLogger {
 
         #weeb-logger-waifu {
           position: fixed;
-          bottom: 0;
+          bottom: 10px;
           right: 0;
-          opacity: 0.5;
+          opacity: 0.6;
           z-index: 999999999;
         }
 
@@ -161,11 +170,11 @@ class WeebLogger {
       resizable.className = 'resizable';
       this.resizable = resizable;
 
-      if (this.config.waifu == 'alya') {
+      if (this.config.waifu.showWaifu) {
         const img = document.createElement('img');
-        img.src = new URL('assets/images/pixchan.webp', import.meta.url).toString();
-        img.width = 200;
-        img.height = 200;
+        img.src = waifuUrls[`${this.config.waifu.name}@${WAIFU_SIZE[this.config.waifu.size]}`];
+        img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
+        img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
         img.id = 'weeb-logger-waifu';
 
         this.resizable.appendChild(img);
@@ -297,7 +306,7 @@ class WeebLogger {
               this.resizable!.style.height = height + 'px'
               this.resizable!.style.top = original_y + (e.pageY - original_mouse_y) + 'px'
             }
-            
+
           }
 
           this.logOnContainer();

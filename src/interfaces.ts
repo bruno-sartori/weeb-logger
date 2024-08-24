@@ -7,7 +7,7 @@ export declare interface IWeebLog {
   diff: string;
 }
 
-export declare interface IContainerStyle {
+export declare interface IWeebLoggerContainerStyle {
   width?: number;
   height?: number;
   position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
@@ -15,9 +15,16 @@ export declare interface IContainerStyle {
   lineHeight?: number;
 }
 
+export declare interface IWeebLoggerWaifu {
+  showWaifu: boolean;
+  name?: 'akeno' | 'alya' | 'aqua' | 'ayano' | 'darkness' | 'koneko' | 'masha' | 'megumin' | 'tohka' | 'yuki' | 'zerotwo';
+  useTheme?: boolean;
+  size?: 'small';
+}
+
 export declare interface IWeebLoggerConfig {
-  enabled?: boolean,
-  visual?: boolean,
-  containerStyle?: IContainerStyle,
-  waifu?: 'alya' | 'mimori-biyakuya'
+  enabled?: boolean;
+  visual?: boolean;
+  containerStyle?: IWeebLoggerContainerStyle;
+  waifu?: IWeebLoggerWaifu;
 }

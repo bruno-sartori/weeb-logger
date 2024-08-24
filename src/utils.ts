@@ -77,3 +77,17 @@ export const getTimeDiff = (date1: Date, date2: Date): string => {
 
   return result;
 };
+
+export const waifuUrls: any = { // new URL(src, import.meta.url) f#$%&?! fails with dynamic string :/  https://github.com/vitejs/vite/issues/11157
+  'akeno@300': new URL('assets/images/akeno_300.webp', import.meta.url).toString(),
+  'alya@300': new URL('assets/images/alya_300.webp', import.meta.url).toString(),
+  'aqua@300': new URL('assets/images/aqua_300.webp', import.meta.url).toString(),
+  'ayano@300': new URL('assets/images/ayano_300.webp', import.meta.url).toString(),
+  'darkness@300': new URL('assets/images/darkness_300.webp', import.meta.url).toString(),
+  'koneko@300': new URL('assets/images/koneko_300.webp', import.meta.url).toString(),
+  'masha@300': new URL('assets/images/masha_300.webp', import.meta.url).toString(),
+  'megumin@300': new URL('assets/images/megumin_300.webp', import.meta.url).toString(),
+  'tohka@300': new URL('assets/images/tohka_300.webp', import.meta.url).toString(),
+  'yuki@300': new URL('assets/images/yuki_300.webp', import.meta.url).toString(),
+  'zerotwo@300': new URL('assets/images/zerotwo_300.webp', import.meta.url).toString(),
+}

@@ -1,4 +1,4 @@
-import { IWeebLoggerConfig, IContainerStyle } from "./interfaces";
+import { IWeebLoggerConfig, IWeebLoggerContainerStyle, IWeebLoggerWaifu } from "./interfaces";
 
 export declare type LogType = 'log' | 'warn' | 'error';
 
@@ -11,9 +11,11 @@ type DeepRequired<T> = {
     : T[P];
 };
 
-declare type IRequiredContainerStyle = DeepRequired<IContainerStyle>;
+declare type IRequiredContainerStyle = DeepRequired<IWeebLoggerContainerStyle>;
+declare type IRequiriedWaifu = DeepRequired<IWeebLoggerWaifu>;
 
 // Ajustando a configuração do logger para usar IRequiredContainerStyle para containerStyle
-export declare type IWeebRequiredLoggerConfig = Omit<DeepRequired<IWeebLoggerConfig>, 'containerStyle'> & {
+export declare type IWeebRequiredLoggerConfig = Omit<DeepRequired<IWeebLoggerConfig>, 'containerStyle' | 'waifu'> & {
   containerStyle: IRequiredContainerStyle;
+  waifu: IRequiriedWaifu;
 };

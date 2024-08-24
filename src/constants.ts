@@ -12,6 +12,11 @@ export const CONTAINER_POSITION = {
   'bottom-left': 'bottom: 0; left: 0'
 };
 
+export const WAIFU_SIZE = {
+  'small': '300',
+  'large': '600'
+};
 
 export const SCROLLBAR_WIDTH = 10;
+
 export const MIN_WIDTH = 400;
