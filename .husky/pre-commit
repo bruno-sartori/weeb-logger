@@ -1,25 +1,30 @@
-#!/bin/bash
-. "$(dirname "$0")/_/husky.sh"
-
 # npx lint-staged
+
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+no_color='\033[0m'
 
 set -o nounset
 
- REPO_ROOT=$(git rev-parse --show-toplevel)
- echo "Git repo is at $REPO_ROOT"
+printf "${blue}Initializing Husky${no_color}\n"
 
- SITE_CHANGES=$(git status -s $REPO_ROOT | wc -l)
- echo "Detected $SITE_CHANGES changes"
+REPO_ROOT=$(git rev-parse --show-toplevel)
+printf "Git repo is at ${yellow}$REPO_ROOT${no_color}\n"
 
- if [ "$SITE_CHANGES" -gt "0" ]; then
-   echo "Checking to make sure package version was updated..."
+SITE_CHANGES=$(git status -s $REPO_ROOT | wc -l)
+printf "Detected ${yellow}$SITE_CHANGES${no_color} changes\n"
+
+if [ "$SITE_CHANGES" -gt "0" ]; then
+  printf "Checking to make sure package version was updated...\n"
 # $(git diff -G '"version":' --cached origin/master package.json | wc -l)
-   VERSION_CHANGED=$(git diff -G '"version":' --cached package.json | wc -l)
+  VERSION_CHANGED=$(git diff -G '"version":' --cached package.json | wc -l)
 
-   if [ "$VERSION_CHANGED" -gt "0" ]; then
-     echo "Version was updated!  Continuing..."
-   else
-     echo "Version was not updated :( Aborting commit."
-     exit 1
-   fi
- fi
+  if [ "$VERSION_CHANGED" -gt "0" ]; then
+    printf "${green}Version was updated!  Continuing...${no_color}\n"
+  else
+    printf "${red}Version was not updated :( Aborting commit.${no_color}\n"
+    exit 1
+  fi
+fi
