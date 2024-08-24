@@ -1,16 +1,18 @@
 import { SCROLLBAR_WIDTH } from "./constants";
+import { IWeebLog } from "./interfaces";
+import { IWeebRequiredLoggerConfig } from "./types";
 
 class WeebLoggerCanvasHandler {
-  private config: IWeebLoggerConfig;
+  private config: IWeebRequiredLoggerConfig;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private y: number;
 
-  constructor(config: IWeebLoggerConfig, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+  constructor(config: IWeebRequiredLoggerConfig, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.config = config;
-    this.y = config.containerStyle!.lineHeight;
+    this.y = config.containerStyle.lineHeight;
 
     this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
@@ -43,7 +45,7 @@ class WeebLoggerCanvasHandler {
         // Then the line is finished, push the current line into "lineArray"
         lineArray.push({ line, x, y });
         // Increase the line height, so a new line is started
-        y += this.config.containerStyle!.lineHeight;
+        y += this.config.containerStyle.lineHeight;
         // Update line and test line to use this word as the first word on the next line
         line = `${words[n]} `;
         testLine = `${words[n]} `;
@@ -65,7 +67,7 @@ class WeebLoggerCanvasHandler {
     const { width, height } = this.canvas!.getBoundingClientRect()
 
     if (this.canvas.width !== width || this.canvas.height !== height) {
-      this.canvas.width = this.config.containerStyle!.width - SCROLLBAR_WIDTH - 40; // 40 margin
+      this.canvas.width = this.config.containerStyle.width - SCROLLBAR_WIDTH - 40; // 40 margin
       this.canvas.height = height;
       return true // here you can return some usefull information like delta width and delta height instead of just true
       // this information can be used in the next redraw...
@@ -86,7 +88,7 @@ class WeebLoggerCanvasHandler {
   };
 
   private getCanvasHeight(logs: Array<IWeebLog>) {
-    this.y = this.config.containerStyle!.lineHeight;
+    this.y = this.config.containerStyle.lineHeight;
     let height = 40;
     const width = this.canvas.width;
     this.ctx.font = "14px Consolas";
@@ -99,7 +101,7 @@ class WeebLoggerCanvasHandler {
         const wrappedText = this.wrapText(j === 0 ? `${log.dateStr}${log.label}${log.message[j]}` : log.message[j], 5, width - 30); // -30: scrollbar 10, padding: 20
         console.log(`1 - `, JSON.stringify(wrappedText));
         for (let k = 0; k < wrappedText.length; k++) {
-          height += this.config.containerStyle!.lineHeight;
+          height += this.config.containerStyle.lineHeight;
         }
       }
     }
@@ -136,7 +138,7 @@ class WeebLoggerCanvasHandler {
           this.ctx.fillText(text[1], x, y);
         }
         
-        this.y += this.config.containerStyle!.lineHeight;
+        this.y += this.config.containerStyle.lineHeight;
       }
     }
 
@@ -144,7 +146,7 @@ class WeebLoggerCanvasHandler {
   }
 
   private draw(logs: Array<IWeebLog>) {
-    this.y = this.config.containerStyle!.lineHeight;
+    this.y = this.config.containerStyle.lineHeight;
 
     for (let i = 0; i < logs?.length; i++) {
       this.drawLog(logs[i]);

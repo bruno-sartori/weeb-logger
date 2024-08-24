@@ -2,10 +2,12 @@ import chalk from 'chalk';
 import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem } from './utils';
 import { BORDER_RADIUS, CONTAINER_POSITION, SCROLLBAR_WIDTH } from './constants';
 import WeebLoggerCanvasHandler from './CanvasHandler'
+import { IWeebLog, IWeebLoggerConfig } from './interfaces';
+import { IWeebRequiredLoggerConfig, LogType } from './types';
 
 const isNode = typeof process === 'object' && `${process}` === '[object process]';
 
-const initialConfig: IWeebLoggerConfig = {
+const initialConfig: IWeebRequiredLoggerConfig = {
   enabled: true,
   visual: false,
   containerStyle: {
@@ -19,7 +21,7 @@ const initialConfig: IWeebLoggerConfig = {
 }
 
 class WeebLogger {
-  private config: IWeebLoggerConfig = initialConfig;
+  private config: IWeebRequiredLoggerConfig = initialConfig;
   private logs: Array<IWeebLog> = [];
 
   private resizable?: HTMLDivElement;
@@ -34,14 +36,18 @@ class WeebLogger {
     this.config.containerStyle!.position === 'top-left';
   }
 
-  public configure(newConfig: IWeebLoggerConfig) {
-    const config = {
-      ...initialConfig,
-      ...newConfig,
+  public configure(newConfig: IWeebLoggerConfig = {...initialConfig}) {
+    const config: IWeebRequiredLoggerConfig = {
+      enabled: newConfig.enabled ?? initialConfig.enabled,
+      visual: newConfig.visual ?? initialConfig.visual,
       containerStyle: {
-        ...initialConfig.containerStyle!,
-        ...newConfig.containerStyle || {}
-      }
+        height: newConfig.containerStyle?.height ?? initialConfig.containerStyle.height,
+        width: newConfig.containerStyle?.width ?? initialConfig.containerStyle.width,
+        position: newConfig.containerStyle?.position ?? initialConfig.containerStyle.position,
+        opacity: newConfig.containerStyle?.opacity ?? initialConfig.containerStyle.opacity,
+        lineHeight: newConfig.containerStyle?.lineHeight ?? initialConfig.containerStyle?.lineHeight,
+      } || {},
+      waifu: newConfig.waifu ?? initialConfig.waifu
     };
 
     this.config = config;
@@ -72,16 +78,16 @@ class WeebLogger {
           overflow: hidden;
           backdrop-filter: blur(10px);
           position: fixed;
-          width: ${pxToRem(this.config.containerStyle!.width)}; 
-          height: ${pxToRem(this.config.containerStyle!.height)}; 
+          width: ${pxToRem(this.config.containerStyle.width)}; 
+          height: ${pxToRem(this.config.containerStyle.height)}; 
           z-index: 99999999;
-          ${CONTAINER_POSITION[this.config.containerStyle!.position]}
+          ${CONTAINER_POSITION[this.config.containerStyle.position]}
         }
 
         #log-container {
           display: flex;
           align-items: flex-start;
-          opacity: ${this.config.containerStyle!.opacity};
+          opacity: ${this.config.containerStyle.opacity};
           overflow-y: scroll;
           direction: ${this.isLeftSide() ? 'rtl' : 'ltr'};
           background-color: rgba(0, 0, 0, 0.5);
@@ -90,7 +96,7 @@ class WeebLogger {
           height: 100%;
           box-sizing: border-box;
 
-          ${BORDER_RADIUS[this.config.containerStyle!.position]}
+          ${BORDER_RADIUS[this.config.containerStyle.position]}
         }
 
         #log-canvas {
@@ -165,7 +171,7 @@ class WeebLogger {
         this.resizable.appendChild(img);
       }
 
-      switch (this.config.containerStyle!.position) {
+      switch (this.config.containerStyle.position) {
         case 'top-right':
           const resizerBottomLeft = document.createElement('div');
           resizerBottomLeft.className = 'resizer bottom-left';
@@ -195,7 +201,7 @@ class WeebLogger {
 
       const canvas = document.createElement('canvas');
       canvas.id = 'log-canvas';
-      canvas.width = this.config.containerStyle!.width - SCROLLBAR_WIDTH - 40;
+      canvas.width = this.config.containerStyle.width - SCROLLBAR_WIDTH - 40;
       canvas.height = 20;
       this.canvas = canvas;
 
