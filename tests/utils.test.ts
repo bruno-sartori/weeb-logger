@@ -57,3 +57,13 @@ describe('Variable type checks should work as expected', () => {
         expect(utils.isValidNumber(99999.99999)).toBeTruthy();
     });
 })
+
+test('Should return 1h diff', () => {
+  const date = new Date();
+  const date2 = new Date();
+  date2.setHours(date.getHours() + 1);
+
+  const diff = utils.getTimeDiff(date, date2);
+
+  expect(diff).toBe('1h0m0s0ms');
+});

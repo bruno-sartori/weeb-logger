@@ -43,7 +43,7 @@ class WeebLoggerCanvasHandler {
       // If the width of this test line is more than the max width
       if (testWidth > maxWidth && n > 0) {
         // Then the line is finished, push the current line into "lineArray"
-        lineArray.push({ line, x, y });
+        lineArray.push({ line: n === words.length -1 ? line.slice(0, -1) : line, x, y });
         // Increase the line height, so a new line is started
         y += this.config.containerStyle.lineHeight;
         // Update line and test line to use this word as the first word on the next line
@@ -56,9 +56,10 @@ class WeebLoggerCanvasHandler {
       }
       // If we never reach the full max width, then there is only one line.. so push it into the lineArray so we return something
       if (n === words.length - 1) {
-        lineArray.push({ line, x, y });
+        lineArray.push({ line: line.slice(0, -1), x, y });
       }
     }
+
     // Return the line array
     return lineArray;
   }

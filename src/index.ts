@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem, waifuUrls } from './utils';
-import { BORDER_RADIUS, CONTAINER_POSITION, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './constants';
+import { BORDER_RADIUS, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './constants';
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
 import { IWeebRequiredLoggerConfig, LogType } from './types';
@@ -62,35 +62,84 @@ class WeebLogger {
     this.config = config;
 
     if (this.config.enabled && this.config.visual && document.getElementById('log-container') === null) {
-      const css = `
-        /* width */
-        #log-container::-webkit-scrollbar {
-          width: ${SCROLLBAR_WIDTH}px;
-        }
+      const canvas = document.createElement('canvas');
+      canvas.id = 'log-canvas';
+      canvas.width = this.config.containerStyle.width - SCROLLBAR_WIDTH - 40;
+      canvas.height = 20;
+      this.canvas = canvas;
 
-        /* Track */
-        #log-container::-webkit-scrollbar-track {
-          ${WAIFU_THEME[this.config.waifu.name].scrollbarTrack}
-        }
-        
-        /* Handle */
-        #log-container::-webkit-scrollbar-thumb {
-          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumb} 
-        }
+      const ctx = this.canvas.getContext('2d');
 
-        /* Handle on hover */
-        #log-container::-webkit-scrollbar-thumb:hover {
-          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumbHover} 
-        }
-        
-        .resizable {
+      if (!ctx) {
+        this.warn('Weeb Logger', 'Unable to initialize WebGL. Your browser or machine may not support it.')
+      } else {
+        this.canvasHandler = new WeebLoggerCanvasHandler(this.config, this.canvas, ctx);
+
+        const css = `
+        #weeb-logger {
           overflow: hidden;
           backdrop-filter: blur(7px);
           position: fixed;
           width: ${pxToRem(this.config.containerStyle.width)}; 
           height: ${pxToRem(this.config.containerStyle.height)}; 
           z-index: 99999999;
-          ${CONTAINER_POSITION[this.config.containerStyle.position]}
+        }
+
+        #weeb-logger.top-left {
+          top: 0;
+          left: 0;
+        }
+
+        #weeb-logger.top-right {
+          top: 0;
+          right: 0;
+        }
+
+        #weeb-logger.bottom-left {
+          bottom: 0;
+          left: 0;
+        }
+
+        #weeb-logger.bottom-right {
+          bottom: 0;
+          right: 0;
+        }
+
+        #weeb-logger-waifu {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          opacity: 0.7;
+          z-index: 999999999;
+        }
+
+        #weeb-logger .resizer {
+          width: 20px;
+          height: 20px;
+          background: transparent;
+          position: absolute;
+          z-index: 99999999999;
+        }
+
+        #weeb-logger .resizer.top-left {
+          left: 0;
+          top: 0;
+          cursor: nwse-resize; /*resizer cursor*/
+        }
+        #weeb-logger .resizer.top-right {
+          right: 0;
+          top: 0;
+          cursor: nesw-resize;
+        }
+        #weeb-logger .resizer.bottom-left {
+          left: 0;
+          bottom: 0;
+          cursor: nesw-resize;
+        }
+        #weeb-logger .resizer.bottom-right {
+          right: 0;
+          bottom: 0;
+          cursor: nwse-resize;
         }
 
         #log-container {
@@ -107,132 +156,99 @@ class WeebLogger {
           ${BORDER_RADIUS[this.config.containerStyle.position]}
         }
 
+        #log-container::-webkit-scrollbar {
+          width: ${SCROLLBAR_WIDTH}px;
+        }
+
+        #log-container::-webkit-scrollbar-track {
+          ${WAIFU_THEME[this.config.waifu.name].scrollbarTrack}
+        }
+        
+        #log-container::-webkit-scrollbar-thumb {
+          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumb} 
+        }
+
+        #log-container::-webkit-scrollbar-thumb:hover {
+          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumbHover} 
+        }
+
         #log-canvas {
           direction: ltr;
           margin: 20px;
           z-index: 9999999999;
         }
-
-        #weeb-logger-waifu {
-          position: fixed;
-          bottom: 10px;
-          right: 10px;
-          opacity: 0.7;
-          z-index: 999999999;
-        }
-
-        .resizable .resizer {
-          width: 20px;
-          height: 20px;
-          background: transparent;
-          position: absolute;
-          z-index: 99999999999;
-        }
-
-        .resizable .resizer.top-left {
-          left: 0;
-          top: 0;
-          cursor: nwse-resize; /*resizer cursor*/
-        }
-        .resizable .resizer.top-right {
-          right: 0;
-          top: 0;
-          cursor: nesw-resize;
-        }
-        .resizable .resizer.bottom-left {
-          left: 0;
-          bottom: 0;
-          cursor: nesw-resize;
-        }
-        .resizable .resizer.bottom-right {
-          right: 0;
-          bottom: 0;
-          cursor: nwse-resize;
-        }
       `;
 
-      const style = document.createElement('style');
-      style.type = 'text/css';
+        const style = document.createElement('style');
+        style.type = 'text/css';
 
-      // @ts-ignore
-      if (style?.styleSheet) { // This is required for IE8 and below.
         // @ts-ignore
-        style.styleSheet.cssText = css;
-      } else {
-        style.appendChild(document.createTextNode(css));
+        if (style?.styleSheet) { // This is required for IE8 and below.
+          // @ts-ignore
+          style.styleSheet.cssText = css;
+        } else {
+          style.appendChild(document.createTextNode(css));
+        }
+
+        const head = document?.head || document?.getElementsByTagName('head')?.[0];
+        head.appendChild(style);
+
+        const resizable = document.createElement('div');
+        resizable.id = 'weeb-logger';
+        resizable.className = this.config.containerStyle.position;
+        this.resizable = resizable;
+
+        if (this.config.waifu.showWaifu) {
+          const img = document.createElement('img');
+          img.src = waifuUrls[`${this.config.waifu.name}@${WAIFU_SIZE[this.config.waifu.size]}`];
+          img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
+          img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
+          img.id = 'weeb-logger-waifu';
+
+          this.resizable.appendChild(img);
+        }
+
+        switch (this.config.containerStyle.position) {
+          case 'top-right':
+            const resizerBottomLeft = document.createElement('div');
+            resizerBottomLeft.className = 'resizer bottom-left';
+            this.resizable.appendChild(resizerBottomLeft);
+            break;
+          case 'top-left':
+            const resizerBottomRight = document.createElement('div');
+            resizerBottomRight.className = 'resizer bottom-right';
+            this.resizable.appendChild(resizerBottomRight);
+            break;
+          case 'bottom-right':
+            const resizerTopLeft = document.createElement('div');
+            resizerTopLeft.className = 'resizer top-left';
+            this.resizable.appendChild(resizerTopLeft);
+            break;
+          case 'bottom-left':
+            const resizerTopRight = document.createElement('div');
+            resizerTopRight.className = 'resizer top-right';
+            this.resizable.appendChild(resizerTopRight);
+            break;
+        }
+
+        const container = document.createElement('div');
+        container.id = 'log-container';
+        container.className = 'resizers';
+        this.container = container;
+
+        this.container.appendChild(this.canvas);
+        this.resizable.appendChild(this.container);
+
+        document.body.appendChild(this.resizable);
+
+        this.makeResizableDiv();
       }
-
-      const head = document?.head || document?.getElementsByTagName('head')?.[0];
-      head.appendChild(style);
-
-      const resizable = document.createElement('div');
-      resizable.className = 'resizable';
-      this.resizable = resizable;
-
-      if (this.config.waifu.showWaifu) {
-        const img = document.createElement('img');
-        img.src = waifuUrls[`${this.config.waifu.name}@${WAIFU_SIZE[this.config.waifu.size]}`];
-        img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
-        img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
-        img.id = 'weeb-logger-waifu';
-
-        this.resizable.appendChild(img);
-      }
-
-      switch (this.config.containerStyle.position) {
-        case 'top-right':
-          const resizerBottomLeft = document.createElement('div');
-          resizerBottomLeft.className = 'resizer bottom-left';
-          this.resizable.appendChild(resizerBottomLeft);
-          break;
-        case 'top-left':
-          const resizerBottomRight = document.createElement('div');
-          resizerBottomRight.className = 'resizer bottom-right';
-          this.resizable.appendChild(resizerBottomRight);
-          break;
-        case 'bottom-right':
-          const resizerTopLeft = document.createElement('div');
-          resizerTopLeft.className = 'resizer top-left';
-          this.resizable.appendChild(resizerTopLeft);
-          break;
-        case 'bottom-left':
-          const resizerTopRight = document.createElement('div');
-          resizerTopRight.className = 'resizer top-right';
-          this.resizable.appendChild(resizerTopRight);
-          break;
-      }
-
-      const container = document.createElement('div');
-      container.id = 'log-container';
-      container.className = 'resizers';
-      this.container = container;
-
-      const canvas = document.createElement('canvas');
-      canvas.id = 'log-canvas';
-      canvas.width = this.config.containerStyle.width - SCROLLBAR_WIDTH - 40;
-      canvas.height = 20;
-      this.canvas = canvas;
-
-      this.container.appendChild(this.canvas);
-      this.resizable.appendChild(this.container);
-
-      const ctx = this.canvas.getContext('2d');
-
-      if (!ctx) {
-        this.warn('Weeb Logger', 'Unable to initialize WebGL. Your browser or machine may not support it.')
-      } else {
-        this.canvasHandler = new WeebLoggerCanvasHandler(this.config, this.canvas, ctx);
-      }
-
-      document.body.appendChild(this.resizable);
-
-      this.makeResizableDiv();
     }
   }
 
   private makeResizableDiv() {
     if (this.resizable !== null) {
-      const resizers: NodeListOf<HTMLDivElement> = document.querySelectorAll('.resizable .resizer')
+      const resizers: NodeListOf<HTMLDivElement> = document.querySelectorAll('#weeb-logger .resizer')
       const minimum_size = 400;
       let original_width = 0;
       let original_height = 0;
@@ -311,7 +327,6 @@ class WeebLogger {
           this.logOnContainer();
         }
 
-
         const stopResize = () => {
           window.removeEventListener('mousemove', resize)
         }
@@ -331,7 +346,6 @@ class WeebLogger {
       message = ` - ${message}`;
 
       this.logs.push({ color, label, message: message.split('\n'), date, dateStr, diff });
-
       if (this.config.visual && !isUndefined(this.canvasHandler)) {
         this.logOnContainer();
       }
@@ -360,6 +374,7 @@ class WeebLogger {
 
   public clear() {
     this.logs = [];
+    console.clear();
     this.logOnContainer();
   }
 
