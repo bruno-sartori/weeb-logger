@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem, waifuUrls } from './utils';
-import { BORDER_RADIUS, CONTAINER_POSITION, SCROLLBAR_WIDTH, WAIFU_SIZE } from './constants';
+import { BORDER_RADIUS, CONTAINER_POSITION, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './constants';
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
 import { IWeebRequiredLoggerConfig, LogType } from './types';
@@ -70,22 +70,22 @@ class WeebLogger {
 
         /* Track */
         #log-container::-webkit-scrollbar-track {
-          background: #ccc; 
+          ${WAIFU_THEME[this.config.waifu.name].scrollbarTrack}
         }
         
         /* Handle */
         #log-container::-webkit-scrollbar-thumb {
-          background: #888; 
+          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumb} 
         }
 
         /* Handle on hover */
         #log-container::-webkit-scrollbar-thumb:hover {
-          background: #555; 
+          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumbHover} 
         }
         
         .resizable {
           overflow: hidden;
-          backdrop-filter: blur(10px);
+          backdrop-filter: blur(7px);
           position: fixed;
           width: ${pxToRem(this.config.containerStyle.width)}; 
           height: ${pxToRem(this.config.containerStyle.height)}; 
@@ -99,12 +99,11 @@ class WeebLogger {
           opacity: ${this.config.containerStyle.opacity};
           overflow-y: scroll;
           direction: ${this.isLeftSide() ? 'rtl' : 'ltr'};
-          background-color: rgba(0, 0, 0, 0.5);
           flex: 1;
           width: 100%;
           height: 100%;
           box-sizing: border-box;
-
+          ${WAIFU_THEME[this.config.waifu.name].logContainer}
           ${BORDER_RADIUS[this.config.containerStyle.position]}
         }
 
@@ -117,8 +116,8 @@ class WeebLogger {
         #weeb-logger-waifu {
           position: fixed;
           bottom: 10px;
-          right: 0;
-          opacity: 0.6;
+          right: 10px;
+          opacity: 0.7;
           z-index: 999999999;
         }
 

@@ -1,6 +1,6 @@
 {
   "name": "@bsartori/weeb-logger",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Bruno Sartori <brunosartori.dev@gmail.com>",
   "license": "MIT",
   "description": "Weeb Logger is a JS Canvas component for logging on devices that are problematic to use debugging tools (specially if you are using some external framework for developing those ahead) like Samsung Tizen, LG webOS or Chromecast. Plus you can customize it with your favorite waifu! :3",
@@ -10,7 +10,6 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "shx rm -rf dist && shx mkdir dist",
     "build": "tsc",
     "postbuild": "shx mkdir -p dist/assets && shx cp -r ./src/assets/* ./dist/assets",
     "prepublishOnly": "yarn build",

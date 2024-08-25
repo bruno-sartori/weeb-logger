@@ -1,4 +1,4 @@
-import { SCROLLBAR_WIDTH } from "./constants";
+import { SCROLLBAR_WIDTH, WAIFU_THEME } from "./constants";
 import { IWeebLog } from "./interfaces";
 import { IWeebRequiredLoggerConfig } from "./types";
 
@@ -105,8 +105,9 @@ class WeebLoggerCanvasHandler {
   }
 
   private drawLog(log: IWeebLog) {
+    const textColor = WAIFU_THEME[this.config.waifu.name].textColor;
     this.ctx.font = "14px Consolas";
-    this.ctx.fillStyle = "#fff";
+    this.ctx.fillStyle = textColor;
     this.ctx.save();
     const width = this.canvas.width;
     
@@ -118,7 +119,7 @@ class WeebLoggerCanvasHandler {
         const y = wrappedText[j].y;
         const text = line.split(log.label);
       
-        this.ctx.fillStyle = '#fff';
+        this.ctx.fillStyle = textColor;
         this.ctx.fillText(text[0], x, y);
         x += this.ctx.measureText(text[0]).width;
 
@@ -127,7 +128,7 @@ class WeebLoggerCanvasHandler {
           this.ctx.fillText(log.label, x, y);
           x += this.ctx.measureText(log.label).width;
           
-          this.ctx.fillStyle = '#fff';
+          this.ctx.fillStyle = textColor;
           this.ctx.fillText(text[1], x, y);
         }
         
