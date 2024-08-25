@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1724608120061" clover="3.2.0">
-  <project timestamp="1724608120061" name="All files">
-    <metrics statements="279" coveredstatements="227" conditionals="118" coveredconditionals="90" methods="34" coveredmethods="31" elements="431" coveredelements="348" complexity="0" loc="279" ncloc="279" packages="1" files="4" classes="4"/>
+<coverage generated="1724611056000" clover="3.2.0">
+  <project timestamp="1724611056000" name="All files">
+    <metrics statements="279" coveredstatements="227" conditionals="136" coveredconditionals="102" methods="34" coveredmethods="31" elements="449" coveredelements="360" complexity="0" loc="279" ncloc="279" packages="1" files="4" classes="4"/>
     <file name="CanvasHandler.ts" path="C:\Users\BrunoSartori\Documents\Projects\logger\src\CanvasHandler.ts">
       <metrics statements="77" coveredstatements="76" conditionals="15" coveredconditionals="11" methods="9" coveredmethods="9"/>
       <line num="1" count="1" type="stmt"/>
@@ -91,7 +91,7 @@
       <line num="17" count="1" type="stmt"/>
     </file>
     <file name="index.ts" path="C:\Users\BrunoSartori\Documents\Projects\logger\src\index.ts">
-      <metrics statements="151" coveredstatements="102" conditionals="75" coveredconditionals="53" methods="14" coveredmethods="11"/>
+      <metrics statements="151" coveredstatements="102" conditionals="93" coveredconditionals="65" methods="14" coveredmethods="11"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>

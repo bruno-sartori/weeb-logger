@@ -19,7 +19,7 @@ const initialConfig: IWeebRequiredLoggerConfig = {
   },
   waifu: {
     showWaifu: true,
-    name: 'masha',
+    name: 'tohka',
     size: 'small',
     useTheme: true
   }
@@ -152,7 +152,7 @@ class WeebLogger {
           width: 100%;
           height: 100%;
           box-sizing: border-box;
-          ${WAIFU_THEME[this.config.waifu.name].logContainer}
+          ${WAIFU_THEME[!this.config.waifu.useTheme || !this.config.waifu.showWaifu ? 'default' : this.config.waifu.name].logContainer}
           ${BORDER_RADIUS[this.config.containerStyle.position]}
         }
 
@@ -161,15 +161,15 @@ class WeebLogger {
         }
 
         #log-container::-webkit-scrollbar-track {
-          ${WAIFU_THEME[this.config.waifu.name].scrollbarTrack}
+          ${WAIFU_THEME[!this.config.waifu.useTheme || !this.config.waifu.showWaifu ? 'default' : this.config.waifu.name].scrollbarTrack}
         }
         
         #log-container::-webkit-scrollbar-thumb {
-          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumb} 
+          ${WAIFU_THEME[!this.config.waifu.useTheme || !this.config.waifu.showWaifu ? 'default' : this.config.waifu.name].scrollbarThumb} 
         }
 
         #log-container::-webkit-scrollbar-thumb:hover {
-          ${WAIFU_THEME[this.config.waifu.name].scrollbarThumbHover} 
+          ${WAIFU_THEME[!this.config.waifu.useTheme || !this.config.waifu.showWaifu ? 'default' : this.config.waifu.name].scrollbarThumbHover} 
         }
 
         #log-canvas {
@@ -360,7 +360,7 @@ class WeebLogger {
         logFn(
           `%c ${dateStr} %c ${label} %c ${message}`,
           `background-color: inherit; color: inherit`,
-          `background-color: ${color}; color: #FFFFFF`,
+          `background-color: ${color}; color: ${logType === 'warn' ? '#000' : '#FFFFFF'}`,
           `background-color: inherit; color: inherit`
         );
       }
