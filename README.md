@@ -38,61 +38,61 @@ logger.highlight('IMPORTANT', 'This is an highlight info');
 
 This will result in:
 
-![Log in DevTools](./docs/devtools-log.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/devtools-log.jpg)
 
 
 ### Using visual: true will create the visual logger container on your web project
 
-![Log in DevTools](./docs/logger-on-web-project.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-on-web-project.jpg)
 
 ### Resizable
-![Log in DevTools](./docs/resizing.gif)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/resizing.gif)
 
 ### Available Waifus
 ```
 name: 'akeno'
 ```
-![Log in DevTools](./docs/logger-akeno.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg)
 ```
 name: 'alya'
 ```
-![Log in DevTools](./docs/logger-alya.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg)
 ```
 name: 'tohka'
 ```
-![Log in DevTools](./docs/logger-tohka.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg)
 ```
 name: 'aqua'
 ```
-![Log in DevTools](./docs/logger-aqua.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg)
 ```
 name: 'ayano'
 ```
-![Log in DevTools](./docs/logger-ayano.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg)
 ```
 name: 'darkness'
 ```
-![Log in DevTools](./docs/logger-darkness.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg)
 ```
 name: 'koneko'
 ```
-![Log in DevTools](./docs/logger-koneko.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg)
 ```
 name: 'masha'
 ```
-![Log in DevTools](./docs/logger-masha.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg)
 ```
 name: 'megumin'
 ```
-![Log in DevTools](./docs/logger-megumin.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg)
 ```
 name: 'yuki'
 ```
-![Log in DevTools](./docs/logger-yuki.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg)
 ```
 name: 'zerotwo'
 ```
-![Log in DevTools](./docs/logger-zerotwo.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg)
 
 
 ## Testing
@@ -104,7 +104,7 @@ yarn test
 ```
 Please make sure all tests pass before submiting a PR
 
-![Log in DevTools](./docs/test.jpg)
+![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/test.jpg)
 
 ## Technologies used in this project
 
