@@ -1,8 +1,12 @@
 {
   "name": "@bsartori/weeb-logger",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "author": "Bruno Sartori <brunosartori.dev@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bruno-sartori/weeb-logger.git"
+  },
   "description": "Weeb Logger is a JS Canvas component for logging on devices that are problematic to use debugging tools (specially if you are using some external framework for developing those ahead) like Samsung Tizen, LG webOS or Chromecast. Plus you can customize it with your favorite waifu! :3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
