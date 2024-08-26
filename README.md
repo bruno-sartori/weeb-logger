@@ -10,7 +10,7 @@ Weeb Logger is a JS Canvas component for logging on devices that are problematic
 Use your favorite package manager, mine is:
 
 ```bash
-yarn add @sartori/weeb-logger
+yarn add @bsartori/weeb-logger
 ```
 
 ## Usage
