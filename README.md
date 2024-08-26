@@ -16,7 +16,7 @@ yarn add @sartori/weeb-logger
 ## Usage
 
 ```tsx
-import logger from '@sartori/logger';
+import logger from '@bsartori/logger';
 
 logger.configure({
   enabled: true,
