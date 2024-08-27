@@ -1,6 +1,6 @@
 {
   "name": "@bsartori/weeb-logger",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "author": "Bruno Sartori <brunosartori.dev@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -40,11 +40,10 @@
     "animes"
   ],
   "dependencies": {
-    "chalk": "4.1.2",
-    "shx": "^0.3.4",
-    "util": "^0.12.5"
+    "chalk": "4.1.2"
   },
   "devDependencies": {
+    "shx": "^0.3.4",
     "copyfiles": "^2.4.1",
     "ts-node": "^10.9.2",
     "cross-env": "^7.0.3",
