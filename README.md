@@ -24,7 +24,11 @@ logger.configure({
   containerStyle: {
     position: 'bottom-left'
   },
-  waifu: 'alya'
+  waifu: {
+    name: 'alya',
+    useTheme: true,
+    showWaifu: true,
+  },
 });
 
 logger.info('SOME LABEL', 'A string or object here!');
@@ -110,7 +114,7 @@ Please make sure all tests pass before submiting a PR
 
 | Name           | Description                                                                                                                             |
 |----------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| [Node.js](https://nodejs.org/en)                                      | Node.js is a Javascript runtime bbuild on Chrome`s V8 JavaScript                 |
+| [Node.js](https://nodejs.org/en)                                      | Node.js is a Javascript runtime build on Chrome`s V8 JavaScript                 |
 | [Jest](https://jestjs.io/)                                            | Jest is a JavaScript framework for testing                                       |
 | [Typescript](https://www.typescriptlang.org)                          | Typescript extends JavaScript by adding types to the language                    |
 | [Chalk](https://github.com/chalk/chalk)                               | Chalk is a nodejs dependency for terminal string                                 |
