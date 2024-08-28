@@ -1,6 +1,6 @@
 {
   "name": "@bsartori/weeb-logger",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "author": "Bruno Sartori <brunosartori.dev@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -14,8 +14,8 @@
     "dist"
   ],
   "scripts": {
+    "prepare-assets": "node ./scripts/generateBase64Assets.js",
     "build": "tsc",
-    "postbuild": "shx mkdir -p dist/assets && shx cp -r ./src/assets/* ./dist/assets",
     "prepublishOnly": "yarn build",
     "test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest",
     "prepare": "husky"

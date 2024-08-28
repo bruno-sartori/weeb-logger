@@ -22,7 +22,11 @@ logger.configure({
   enabled: true,
   visual: true,
   containerStyle: {
-    position: 'bottom-left'
+    position: 'bottom-left',
+    width: 800,
+    height: 800,
+    opacity: 1,
+    lineHeight: 20,
   },
   waifu: {
     name: 'alya',
