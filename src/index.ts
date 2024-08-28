@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem, waifuUrls } from './utils';
+import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem } from './utils';
 import { BORDER_RADIUS, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './constants';
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
@@ -202,7 +202,7 @@ class WeebLogger {
         if (this.config.waifu.showWaifu) {
           const img = document.createElement('img');
           // @ts-ignore
-          img.src = `data:image/webp;base64, ${waifus[this.config.waifu.name]}`; /*new URL('./assets/images/masha_300.webp', getFileUrl()).toString(); waifuUrls[`${this.config.waifu.name}@${WAIFU_SIZE[this.config.waifu.size]}`];*/
+          img.src = `data:image/webp;base64, ${waifus[this.config.waifu.name]}`;
           img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
           img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
           img.id = 'weeb-logger-waifu';
