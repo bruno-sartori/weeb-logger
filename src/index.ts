@@ -4,6 +4,7 @@ import { BORDER_RADIUS, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './const
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
 import { IWeebRequiredLoggerConfig, LogType } from './types';
+import waifus from './waifus.json';
 
 const isNode = typeof process === 'object' && `${process}` === '[object process]';
 
@@ -200,7 +201,8 @@ class WeebLogger {
 
         if (this.config.waifu.showWaifu) {
           const img = document.createElement('img');
-          img.src = waifuUrls[`${this.config.waifu.name}@${WAIFU_SIZE[this.config.waifu.size]}`];
+          // @ts-ignore
+          img.src = `data:image/webp;base64, ${waifus[this.config.waifu.name]}`; /*new URL('./assets/images/masha_300.webp', getFileUrl()).toString(); waifuUrls[`${this.config.waifu.name}@${WAIFU_SIZE[this.config.waifu.size]}`];*/
           img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
           img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
           img.id = 'weeb-logger-waifu';
