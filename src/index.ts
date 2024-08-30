@@ -4,7 +4,6 @@ import { BORDER_RADIUS, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './const
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
 import { IWeebRequiredLoggerConfig, LogType } from './types';
-import waifus from './waifus.json';
 
 const isNode = typeof process === 'object' && `${process}` === '[object process]';
 
@@ -51,7 +50,7 @@ class WeebLogger {
         position: newConfig.containerStyle?.position ?? initialConfig.containerStyle.position,
         opacity: newConfig.containerStyle?.opacity ?? initialConfig.containerStyle.opacity,
         lineHeight: newConfig.containerStyle?.lineHeight ?? initialConfig.containerStyle?.lineHeight,
-      } || {},
+      },
       waifu: {
         showWaifu: newConfig.waifu?.showWaifu ?? initialConfig.waifu.showWaifu,
         name: newConfig.waifu?.name ?? initialConfig.waifu.name,
@@ -202,7 +201,7 @@ class WeebLogger {
         if (this.config.waifu.showWaifu) {
           const img = document.createElement('img');
           // @ts-ignore
-          img.src = `data:image/webp;base64, ${waifus[this.config.waifu.name]}`;
+          img.src = `https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/waifus/${this.config.waifu.name}_300.webp`;
           img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
           img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
           img.id = 'weeb-logger-waifu';
@@ -211,26 +210,26 @@ class WeebLogger {
         }
 
         switch (this.config.containerStyle.position) {
-          case 'top-right':
+          case 'top-right': {
             const resizerBottomLeft = document.createElement('div');
             resizerBottomLeft.className = 'resizer bottom-left';
             this.resizable.appendChild(resizerBottomLeft);
-            break;
-          case 'top-left':
+          } break;
+          case 'top-left': {
             const resizerBottomRight = document.createElement('div');
             resizerBottomRight.className = 'resizer bottom-right';
             this.resizable.appendChild(resizerBottomRight);
-            break;
-          case 'bottom-right':
+          } break;
+          case 'bottom-right': {
             const resizerTopLeft = document.createElement('div');
             resizerTopLeft.className = 'resizer top-left';
             this.resizable.appendChild(resizerTopLeft);
-            break;
-          case 'bottom-left':
+          } break;
+          case 'bottom-left': {
             const resizerTopRight = document.createElement('div');
             resizerTopRight.className = 'resizer top-right';
             this.resizable.appendChild(resizerTopRight);
-            break;
+          } break;
         }
 
         const container = document.createElement('div');
