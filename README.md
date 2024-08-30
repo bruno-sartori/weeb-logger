@@ -114,6 +114,19 @@ Please make sure all tests pass before submiting a PR
 
 ![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/test.jpg)
 
+## Roadmap 
+Would love Pull requests that build towards these objectives and even ideas for new objectives :3
+ - [x] ~~Decrease package size (As waifu images increase, we'll need to store them on a CDN or something like that)~~ Solved by using GitHub URL to the raw image LOL
+ - [x] Configure ESLint 
+ - [ ] Tests
+   - [ ] Resize (aparently jest-dom doesn't support getting element dimensions)
+   - [ ] !isNode (maybe find another way to determine if environment is nodejs or browser other than ```typeof process === 'object' && `${process}\` === '[object process]')```
+ - [ ] Add a CI pipeline that runs the tests
+ - [ ] Add more waifus! It would be very cool if some artist drew them for us :heart_eyes:
+ - [ ] Log levels
+ - [ ] Increase customization options
+ - [ ] Organize this mess I call code :laughing:
+
 ## Technologies used in this project
 
 | Name           | Description                                                                                                                             |

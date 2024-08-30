@@ -35,7 +35,7 @@ class WeebLoggerCanvasHandler {
     let lineArray: Array<{ line: string, x: number, y: number }> = []; // This is an array of lines, which the function will return
 
     // Lets iterate over each word
-    for (var n = 0; n < words.length; n++) {
+    for (let n = 0; n < words.length; n++) {
       // Create a test line, and measure it..
       testLine += `${words[n]} `;
       let metrics = this.ctx.measureText(testLine);
