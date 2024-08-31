@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { formatDate, getTimeDiff, isUndefined, isValidString, pxToRem } from './utils';
+import { formatDate, formatErrorWithStackTrace, getTimeDiff, isUndefined, isValidString, pxToRem } from './utils';
 import { BORDER_RADIUS, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './constants';
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
@@ -10,6 +10,7 @@ const isNode = typeof process === 'object' && `${process}` === '[object process]
 const initialConfig: IWeebRequiredLoggerConfig = {
   enabled: true,
   visual: false,
+  formatStackTrace: true,
   containerStyle: {
     position: 'bottom-right',
     width: 800,
@@ -20,7 +21,6 @@ const initialConfig: IWeebRequiredLoggerConfig = {
   waifu: {
     showWaifu: true,
     name: 'tohka',
-    size: 'small',
     useTheme: true
   }
 }
@@ -44,6 +44,7 @@ class WeebLogger {
     const config: IWeebRequiredLoggerConfig = {
       enabled: newConfig.enabled ?? initialConfig.enabled,
       visual: newConfig.visual ?? initialConfig.visual,
+      formatStackTrace: newConfig.formatStackTrace ?? initialConfig.formatStackTrace,
       containerStyle: {
         height: newConfig.containerStyle?.height ?? initialConfig.containerStyle.height,
         width: newConfig.containerStyle?.width ?? initialConfig.containerStyle.width,
@@ -54,7 +55,6 @@ class WeebLogger {
       waifu: {
         showWaifu: newConfig.waifu?.showWaifu ?? initialConfig.waifu.showWaifu,
         name: newConfig.waifu?.name ?? initialConfig.waifu.name,
-        size: newConfig.waifu?.size ?? initialConfig.waifu.size,
         useTheme: newConfig.waifu?.useTheme ?? initialConfig.waifu.useTheme
       }
     };
@@ -202,8 +202,8 @@ class WeebLogger {
           const img = document.createElement('img');
           // @ts-ignore
           img.src = `https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/waifus/${this.config.waifu.name}_300.webp`;
-          img.width = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
-          img.height = parseInt(WAIFU_SIZE[this.config.waifu.size], 10);
+          img.width = parseInt(WAIFU_SIZE['small'], 10);
+          img.height = parseInt(WAIFU_SIZE['small'], 10);
           img.id = 'weeb-logger-waifu';
 
           this.resizable.appendChild(img);
@@ -335,18 +335,53 @@ class WeebLogger {
     }
   }
 
-  private log(color: any, label: string, message: any, logType: LogType = 'log') {
-    if (this.config.enabled) {
-      if (!isValidString(message)) {
-        message = JSON.stringify(message, null, 2);
+  private async formatMessageForContainer(message: string | object): Promise<Array<string>> {
+    let formattedMessage = message;
+    
+    if (formattedMessage instanceof Error) {
+      if (this.config.formatStackTrace) {
+        try {
+          formattedMessage = formatErrorWithStackTrace(formattedMessage.message, await StackTrace.fromError(formattedMessage));
+        } catch {
+          formattedMessage = (formattedMessage as Error).stack ?? (formattedMessage as Error).message;
+        }
+      } else {
+        formattedMessage = (formattedMessage as Error).stack ?? (formattedMessage as Error).message;
       }
+    } else if (!isValidString(message)) {
+      formattedMessage = JSON.stringify(formattedMessage, null, 2);
+    }
+  
+    formattedMessage = ` - ${formattedMessage}`;
+    const result = formattedMessage.split('\n');
+  
+    return result;
+  }
+  
+  private formatMessageForLogFn(message: string | object) {
+    let formattedMessage = message;
+    
+    if (formattedMessage instanceof Error) {
+      formattedMessage = formattedMessage.message;
+    } else if (!isValidString(message)) {
+      formattedMessage = JSON.stringify(formattedMessage, null, 2);
+    }
+  
+    formattedMessage = ` - ${formattedMessage}`;
+  
+    return formattedMessage;
+  }
+  
+  private async log(color: any, label: string, message: string | object, logType: LogType = 'log') {
+    if (this.config.enabled) {
+      const containerMessage = await this.formatMessageForContainer(message);
+      const logFnMessage = this.formatMessageForLogFn(message);
 
       const date = new Date();
       const diff = this.logs.length === 0 ? '0ms' : getTimeDiff(this.logs[this.logs.length - 1].date, date);
       const dateStr = `[${formatDate(date)}] ${diff} `;
-      message = ` - ${message}`;
 
-      this.logs.push({ color, label, message: message.split('\n'), date, dateStr, diff });
+      this.logs.push({ color, label, message: containerMessage, date, dateStr, diff });
       if (this.config.visual && !isUndefined(this.canvasHandler)) {
         this.logOnContainer();
       }
@@ -356,10 +391,10 @@ class WeebLogger {
       if (isNode) {
         const chalkColor = chalk.hex(color);
         // @ts-ignore
-        return logFn(dateStr, `${chalkColor(label)}`, message);
+        return logFn(dateStr, `${chalkColor(label)}`, logFnMessage);
       } else {
         logFn(
-          `%c ${dateStr} %c ${label} %c ${message}`,
+          `%c${dateStr}%c${label}%c${logFnMessage}`,
           `background-color: inherit; color: inherit`,
           `background-color: ${color}; color: ${logType === 'warn' ? '#000' : '#FFFFFF'}`,
           `background-color: inherit; color: inherit`
@@ -379,54 +414,25 @@ class WeebLogger {
     this.logOnContainer();
   }
 
-  public info(label: string, message: any) {
+  public info(label: string, message: string | object) {
     return this.log('#1b81a8', label, message);
   };
 
-  public highlight(label: string, message: any) {
+  public highlight(label: string, message: string | object) {
     return this.log('#993d99', label, message);
   };
 
-  public success(label: string, message: any) {
+  public success(label: string, message: string | object) {
     return this.log('#108327', label, message);
   };
 
-  public warn(label: string, message: any) {
+  public warn(label: string, message: string | object) {
     return this.log('#e7f531', label, message, 'warn');
   };
 
-  public error(label: string, message: any) {
+  public error(label: string, message: string | object) {
     return this.log('#ba1e18', label, message, 'error');
   };
 }
-
-
-/*
-(function () {
-  if (REACT_APP_LOG_CONTAINER === 'true') {
-    let oldLog = console.log;
-    console.log = function (...message) {
-      logger.info('CONSOLE', message);
-      // DO MESSAGE HERE.
-      oldLog.apply(console, arguments);
-    };
-
-    let oldWarn = console.warn;
-    console.warn = function (...message) {
-      logger.warn('CONSOLE', message);
-      // DO MESSAGE HERE.
-      oldWarn.apply(console, arguments);
-    };
-
-    let oldError = console.error;
-    console.error = function (...message) {
-      logger.error('CONSOLE', message);
-      // DO MESSAGE HERE.
-      oldError.apply(console, arguments);
-    };
-  }
-})();
-
-*/
 
 export default new WeebLogger();
