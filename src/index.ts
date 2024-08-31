@@ -4,6 +4,7 @@ import { BORDER_RADIUS, SCROLLBAR_WIDTH, WAIFU_SIZE, WAIFU_THEME } from './const
 import WeebLoggerCanvasHandler from './CanvasHandler'
 import { IWeebLog, IWeebLoggerConfig } from './interfaces';
 import { IWeebRequiredLoggerConfig, LogType } from './types';
+import StackTraceJS from 'stacktrace-js';
 
 const isNode = typeof process === 'object' && `${process}` === '[object process]';
 
@@ -341,7 +342,7 @@ class WeebLogger {
     if (formattedMessage instanceof Error) {
       if (this.config.formatStackTrace) {
         try {
-          formattedMessage = formatErrorWithStackTrace(formattedMessage.message, await StackTrace.fromError(formattedMessage));
+          formattedMessage = formatErrorWithStackTrace(formattedMessage.message, await StackTraceJS.fromError(formattedMessage));
         } catch {
           formattedMessage = (formattedMessage as Error).stack ?? (formattedMessage as Error).message;
         }
