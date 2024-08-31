@@ -7,24 +7,27 @@ export declare interface IWeebLog {
   diff: string;
 }
 
+type TWeebLoggerContainerPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+type TWeebLoggerWaifuName = 'akeno' | 'alya' | 'aqua' | 'ayano' | 'darkness' | 'koneko' | 'masha' | 'megumin' | 'tohka' | 'yuki' | 'zerotwo';
+
 export declare interface IWeebLoggerContainerStyle {
   width?: number;
   height?: number;
-  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+  position?: TWeebLoggerContainerPosition;
   opacity?: number;
   lineHeight?: number;
 }
 
 export declare interface IWeebLoggerWaifu {
   showWaifu: boolean;
-  name?: 'akeno' | 'alya' | 'aqua' | 'ayano' | 'darkness' | 'koneko' | 'masha' | 'megumin' | 'tohka' | 'yuki' | 'zerotwo';
+  name?: TWeebLoggerWaifuName;
   useTheme?: boolean;
-  size?: 'small';
 }
 
 export declare interface IWeebLoggerConfig {
   enabled?: boolean;
   visual?: boolean;
+  formatStackTrace?: boolean;
   containerStyle?: IWeebLoggerContainerStyle;
   waifu?: IWeebLoggerWaifu;
 }

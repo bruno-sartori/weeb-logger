@@ -21,6 +21,7 @@ import logger from '@bsartori/logger';
 logger.configure({
   enabled: true,
   visual: true,
+  enableStackTrace: true,
   containerStyle: {
     position: 'bottom-left',
     width: 800,
@@ -42,66 +43,83 @@ logger.success('JSON', { lorem: 'ipsum', dolor: {
   sit: 'amet'
 }});
 logger.highlight('IMPORTANT', 'This is an highlight info');
+try {
+  throw new Error('I can also log Error objects!');
+} catch (error: any) {
+  logger.error('ERROR OBJECT', error);
+}
 ```
 
-This will result in:
+On DevTools this will result in:
 
 ![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/devtools-log.jpg)
 
-
-### Using visual: true will create the visual logger container on your web project
+And in your application:
 
 ![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-on-web-project.jpg)
 
-### Resizable
+You can also resize the container:
 ![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/resizing.gif)
 
-### Available Waifus
-```
-name: 'akeno'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg)
-```
-name: 'alya'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg)
-```
-name: 'tohka'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg)
-```
-name: 'aqua'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg)
-```
-name: 'ayano'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg)
-```
-name: 'darkness'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg)
-```
-name: 'koneko'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg)
-```
-name: 'masha'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg)
-```
-name: 'megumin'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg)
-```
-name: 'yuki'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg)
-```
-name: 'zerotwo'
-```
-![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg)
 
+### Log Message Structure
+
+```
+// message ---------------------------------------+
+// label -------------------------+               |
+// time diff from last log ---+   |               |
+// datetime ---+              |   |               |
+//             v              v   v               v
+    [31/08/24 10:41:21:457] 10ms INFO - Lorem ipsum dolor sit amet
+```
+
+### Available Waifus
+
+| Name       | Description                                                                                                                      | Name     | Description                                                                                                                      |
+|------------|----------------------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------|
+| `akeno`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg" width="375" height="375" />    | `alya`   | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg" width="375" height="375" />          |
+| `tohka`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg" width="375" height="375" />    | `aqua`     | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg" width="375" height="375" />     |
+| `ayano`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg" width="375" height="375" />    | `darkness` | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg" width="375" height="375" /> |
+| `koneko`   | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg" width="375" height="375" />   | `masha`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg" width="375" height="375" />    |
+| `megumin`  | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg" width="375" height="375" />  | `yuki`     | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg" width="375" height="375" />     |
+| `zerotwo`  | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg" width="375" height="375" />  |                                                                                                                             |
+
+## API
+
+### Configuration Object
+* *`enabled`: Boolean (default: true)* - Set to `false` to completely disable weeb-logger
+* *`visual`: Boolean (default: true)* - Set to `false` to only disable visual container (logging on DevTools or node cmd will still work)
+* *`formatStackTrace`: Boolean (default: true)* - Uses [stacktrace.js](https://github.com/stacktracejs/stacktrace.js) to format error stacktraces when the log message is an instance of `Error`. This way stack traces will show original files rather than bundled files. It makes HTTP requests to sourcemaps.
+* *`containerStyle`: Object(IWeebLoggerContainerStyle)* - Container style configuration object.
+    * *`width`: Number (default: 800)* - Width of the container.
+    * *`height`: Number (default: 800)* - Height of the container.
+    * *`position`: TWeebLoggerContainerPosition (default: 'bottom-right')* - Available values: `top-right`, `top-left`, `bottom-right` and `bottom-left`.
+    * *`opacity`: Number (default: 1)* - Decrease this value if you want to see content that is below the visual container.
+    * *`lineHeight`: Number (default: 20) - Line height for log messages on the visual container.
+* *`waifu`: Object(IWeebLoggerWaifu)* - Waifu configuration object.
+    * *`showWaifu`: (default: true)* - Set to `false` to remove Waifu image.
+    * *`name`: (default: 'tohka')*: Selects waifu to display. Available values: `akeno`, `alya`, `aqua`, `ayano`, `darkness`, `koneko`, `masha`, `megumin`, `tohka`, `yuki`, `zerotwo`.
+    * *`useTheme`: (default: true)* - Uses Waifu theme style, set to `false` to use default theme style.
+
+### Methods
+
+#### `logger.info(label: string, message: string | object)` => void
+Shows log with a <span style="color:#1b81a8;">*blue*</span> label.
+
+#### `logger.success(label: string, message: string | object)` => void
+Shows log with a <span style="color:#108327;">*green*</span> label.
+
+#### `logger.warn(label: string, message: string | object)` => void
+Shows log with a <span style="color:#e7f531;">*yellow*</span> label. Shows stacktrace on DevTools.
+
+#### `logger.error(label: string, message: string | object)` => void
+Shows log with a <span style="color:#ba1e18;">*red*</span> label. Shows stacktrace on DevTools and if the message is an instance of `Error` object it will also show stack trace on the visual container.
+
+#### `logger.highlight(label: string, message: string | object)` => void
+Shows log with a <span style="color:#993d99;">*purple*</span> label.
+
+#### `logger.clear()` => void
+Clears the log container and DevTools console screen.
 
 ## Testing
 
@@ -117,7 +135,8 @@ Please make sure all tests pass before submiting a PR
 ## Roadmap 
 Would love Pull requests that build towards these objectives and even ideas for new objectives :3
  - [x] ~~Decrease package size (As waifu images increase, we'll need to store them on a CDN or something like that)~~ Solved by using GitHub URL to the raw image LOL
- - [x] Configure ESLint 
+ - [x] Configure ESLint
+ - [x] Improve README.md
  - [ ] Tests
    - [ ] Resize (aparently jest-dom doesn't support getting element dimensions)
    - [ ] !isNode (maybe find another way to determine if environment is nodejs or browser other than ```typeof process === 'object' && `${process}\` === '[object process]')```
@@ -134,7 +153,8 @@ Would love Pull requests that build towards these objectives and even ideas for 
 | [Node.js](https://nodejs.org/en)                                      | Node.js is a Javascript runtime build on Chrome`s V8 JavaScript                 |
 | [Jest](https://jestjs.io/)                                            | Jest is a JavaScript framework for testing                                       |
 | [Typescript](https://www.typescriptlang.org)                          | Typescript extends JavaScript by adding types to the language                    |
-| [Chalk](https://github.com/chalk/chalk)                               | Chalk is a nodejs dependency for terminal string                                 |
+| [Chalk](https://github.com/chalk/chalk)                               | Chalk is a Node.js dependency for terminal string                                 |
+| [stacktrace.js](https://github.com/stacktracejs/stacktrace.js)        | stacktrace.js is a Node.js module for formatting JavaScript stack traces in all browsers |
 | [Canvas](https://developer.mozilla.org/pt-BR/docs/Web/API/Canvas_API) | Canvas provides a means for drawing graphics via JavaScript and the HTML element |
 
 

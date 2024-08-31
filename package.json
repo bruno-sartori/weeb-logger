@@ -1,6 +1,6 @@
 {
   "name": "@bsartori/weeb-logger",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "author": "Bruno Sartori <brunosartori.dev@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -43,7 +43,8 @@
     "animes"
   ],
   "dependencies": {
-    "chalk": "4.1.2"
+    "chalk": "4.1.2",
+    "stacktrace-js": "^2.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
@@ -65,6 +66,8 @@
     "typescript-eslint": "^8.3.0"
   },
   "lint-staged": {
-    "src/*.{js,ts}": ["eslint --fix"]
+    "src/*.{js,ts}": [
+      "eslint --fix"
+    ]
   }
 }

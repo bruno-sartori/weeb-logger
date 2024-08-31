@@ -1,3 +1,5 @@
+import { StackFrame } from "stacktrace-js";
+
 export const isNull = (value: any): boolean => value === null;
 
 export const isUndefined = (value: any): boolean => typeof value === 'undefined';
@@ -77,3 +79,14 @@ export const getTimeDiff = (date1: Date, date2: Date): string => {
 
   return result;
 };
+
+export const formatErrorWithStackTrace = (message: string, stackTrace: Array<StackFrame>) => {
+  let formattedErrorWithStackTrace = `${message}\n`;
+
+  for (let i = 0; i < stackTrace.length; i++) {
+    const stack = stackTrace[i];
+    formattedErrorWithStackTrace += `   at ${stack.functionName} (${stack.fileName?.replace(/^.*[\\/]/, '')}:${stack.lineNumber})\n`;
+  }
+
+  return formattedErrorWithStackTrace;
+}
