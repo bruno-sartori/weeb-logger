@@ -77,17 +77,17 @@ You can also resize the container:
 ### Available Waifus
 | `akeno`     | `alya`      |
 |-----------|-----------|
-| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg" width="375" height="375" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg" width="375" height="375" /> |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg" width="400" height="400" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg" width="400" height="400" /> |
 | `tohka`     | `aqua`      |
-| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg" width="375" height="375" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg" width="375" height="375" /> |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg" width="400" height="400" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg" width="400" height="400" /> |
 | `ayano`     | `darkness`  |
-| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg" width="375" height="375" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg" width="375" height="375" /> |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg" width="400" height="400" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg" width="400" height="400" /> |
 | `koneko`    | `masha`     |
-| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg" width="375" height="375" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg" width="375" height="375" /> |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg" width="400" height="400" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg" width="400" height="400" /> |
 | `megumin`   | `yuki`      |
-| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg" width="375" height="375" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg" width="375" height="375" /> |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg" width="400" height="400" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg" width="400" height="400" /> |
 | `zerotwo`   |           |
-| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg" width="375" height="375" /> |           |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg" width="400" height="400" /> |           |
 
 
 ## API
