@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.87% </span>
+                <span class="strong">88.73% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>62/64</span>
+                <span class='fraction'>63/71</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">86.27% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/46</span>
+                <span class='fraction'>44/51</span>
             </div>
         
             
@@ -155,14 +155,15 @@
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">41x</span>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">53x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,19 +238,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const isNull = (value: any): boolean =&gt; value === null;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { StackFrame } from "stacktrace-js";
+&nbsp;
+export const isNull = (value: any): boolean =&gt; value === null;
 &nbsp;
 export const isUndefined = (value: any): boolean =&gt; typeof value === 'undefined';
 &nbsp;
@@ -329,18 +329,15 @@ export const getTimeDiff = (date1: Date, date2: Date): string =&gt; {
   return result;
 };
 &nbsp;
-export const waifuUrls: any = { // new URL(src, import.meta.url) f#$%&amp;?! fails with dynamic string :/  https://github.com/vitejs/vite/issues/11157
-  'akeno@300': new URL('assets/images/akeno_300.webp', import.meta.url).toString(),
-  'alya@300': new URL('assets/images/alya_300.webp', import.meta.url).toString(),
-  'aqua@300': new URL('assets/images/aqua_300.webp', import.meta.url).toString(),
-  'ayano@300': new URL('assets/images/ayano_300.webp', import.meta.url).toString(),
-  'darkness@300': new URL('assets/images/darkness_300.webp', import.meta.url).toString(),
-  'koneko@300': new URL('assets/images/koneko_300.webp', import.meta.url).toString(),
-  'masha@300': new URL('assets/images/masha_300.webp', import.meta.url).toString(),
-  'megumin@300': new URL('assets/images/megumin_300.webp', import.meta.url).toString(),
-  'tohka@300': new URL('assets/images/tohka_300.webp', import.meta.url).toString(),
-  'yuki@300': new URL('assets/images/yuki_300.webp', import.meta.url).toString(),
-  'zerotwo@300': new URL('assets/images/zerotwo_300.webp', import.meta.url).toString(),
+export const formatErrorWithStackTrace = <span class="fstat-no" title="function not covered" >(m</span>essage: string, stackTrace: Array&lt;StackFrame&gt;) =&gt; {
+  let formattedErrorWithStackTrace = <span class="cstat-no" title="statement not covered" >`${message}\n`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; stackTrace.length; i++) {</span>
+    const stack = <span class="cstat-no" title="statement not covered" >stackTrace[i];</span>
+<span class="cstat-no" title="statement not covered" >    formattedErrorWithStackTrace += `   at ${stack.functionName} (${stack.fileName?.replace(/^.*[\\/]/, '')}:${stack.lineNumber})\n`;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return formattedErrorWithStackTrace;</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -349,7 +346,7 @@ export const waifuUrls: any = { // new URL(src, import.meta.url) f#$%&amp;?! fai
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-25T18:37:35.973Z
+                at 2024-08-31T13:33:35.130Z
             </div>
         <script src="prettify.js"></script>
         <script>
