@@ -59,6 +59,7 @@ And in your application:
 ![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-on-web-project.jpg)
 
 You can also resize the container:
+
 ![Log in DevTools](https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/resizing.gif)
 
 
@@ -74,15 +75,20 @@ You can also resize the container:
 ```
 
 ### Available Waifus
+| `akeno`     | `alya`      |
+|-----------|-----------|
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg" width="325" height="325" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg" width="325" height="325" /> |
+| `tohka`     | `aqua`      |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg" width="325" height="325" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg" width="325" height="325" /> |
+| `ayano`     | `darkness`  |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg" width="325" height="325" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg" width="325" height="325" /> |
+| `koneko`    | `masha`     |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg" width="325" height="325" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg" width="325" height="325" /> |
+| `megumin`   | `yuki`      |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg" width="325" height="325" /> | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg" width="325" height="325" /> |
+| `zerotwo`   |           |
+| <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg" width="325" height="325" /> |           |
 
-| Name       | Description                                                                                                                      | Name     | Description                                                                                                                      |
-|------------|----------------------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------|
-| `akeno`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-akeno.jpg" width="375" height="375" />    | `alya`   | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-alya.jpg" width="375" height="375" />          |
-| `tohka`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-tohka.jpg" width="375" height="375" />    | `aqua`     | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-aqua.jpg" width="375" height="375" />     |
-| `ayano`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-ayano.jpg" width="375" height="375" />    | `darkness` | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-darkness.jpg" width="375" height="375" /> |
-| `koneko`   | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-koneko.jpg" width="375" height="375" />   | `masha`    | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-masha.jpg" width="375" height="375" />    |
-| `megumin`  | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-megumin.jpg" width="375" height="375" />  | `yuki`     | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-yuki.jpg" width="375" height="375" />     |
-| `zerotwo`  | <img src="https://raw.githubusercontent.com/bruno-sartori/weeb-logger/main/docs/logger-zerotwo.jpg" width="375" height="375" />  |                                                                                                                             |
 
 ## API
 
