@@ -1,4 +1,4 @@
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/) ![NPM Version](https://img.shields.io/npm/v/%40bsartori%2Fweeb-logger)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)  [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/bruno-sartori) ![NPM Version](https://img.shields.io/npm/v/%40bsartori%2Fweeb-logger) ![Build Passing](https://img.shields.io/badge/Build-Passing-green.svg)
 
 
 # Weeb Logger
