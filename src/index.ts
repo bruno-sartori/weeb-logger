@@ -373,7 +373,7 @@ class WeebLogger {
     return formattedMessage;
   }
   
-  private async log(color: any, label: string, message: string | object, logType: LogType = 'log') {
+  private async log(color: string, label: string, message: string | object, logType: LogType = 'log') {
     if (this.config.enabled) {
       const containerMessage = await this.formatMessageForContainer(message);
       const logFnMessage = this.formatMessageForLogFn(message);
